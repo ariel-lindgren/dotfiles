@@ -1,0 +1,14 @@
+Just keeping my configuration files on the net.
+
+Install
+=======
+
+Check this out to ~/Personal/bin/dotfiles and then:
+
+cp dotfiles/bash/bashrc ~/.bashrc
+cp dotfiles/bash/bash_profile ~/.bash_profile 
+
+Bash
+====
+
+Bash uses vcprompt, that can be downloaded from http://vc.gerg.ca/hg/vcprompt and then needs to be compiled. After compiling, copy it to your personal bin directory

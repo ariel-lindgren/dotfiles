@@ -1,0 +1,9 @@
+# Utility
+alias reload='source ~/Personal/bin/dotfiles/bash/aliases'
+alias ea='mate -w ~/Personal/bin/dotfiles/bash/aliases && reload' # Edit aliases
+alias ee="mate ~/Personal/bin/dotfiles/bash/env"
+
+# Common
+alias ll="ls -A -l -G"
+alias c="clear"
+
