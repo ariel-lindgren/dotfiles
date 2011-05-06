@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ln -nsf ~/Personal/bin/dotfiles/bash_profile ~/.bash_profile
+ln -nsf ~/Personal/bin/dotfiles/bashrc ~/.bashrc
+ln -nsf ~/Personal/bin/dotfiles/vim/vim ~/.vim
+ln -nsf ~/Personal/bin/dotfiles/vim/vimrc ~/.vimrc

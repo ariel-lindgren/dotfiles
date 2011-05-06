@@ -1,2 +1,4 @@
 export EDITOR="mate -w"
 PATH=~/Personal/bin:$PATH
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
