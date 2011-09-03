@@ -1,5 +1,5 @@
 # Utility
-alias reload='source ~/Personal/bin/dotfiles/bash/aliases'
+alias reload='source ~/Personal/bin/dotfiles/bash/bashrc'
 alias ea='mate -w ~/Personal/bin/dotfiles/bash/aliases && reload' # Edit aliases
 alias ee="mate ~/Personal/bin/dotfiles/bash/env"
 
@@ -7,3 +7,5 @@ alias ee="mate ~/Personal/bin/dotfiles/bash/env"
 alias ll="ls -A -l -G"
 alias c="clear"
 
+# Shell utility
+alias cpath="pwd | pbcopy"

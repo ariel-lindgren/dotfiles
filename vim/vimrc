@@ -1,0 +1,166 @@
+set nocompatible
+syntax enable 
+set hidden 
+set hlsearch 
+set number 
+set numberwidth=5
+
+set wildmenu
+
+" Make searches case-sensitive only if they contain upper-case characters
+set ignorecase
+set smartcase
+
+" Keep more context when scrolling off the end of a buffer
+set scrolloff=3
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" GRB: sane editing configuration"
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+
+" set smartindent
+set laststatus=2
+set showmatch
+set incsearch
+
+if has("gui_running")
+  " GRB: set font"
+  ":set nomacatsui anti enc=utf-8 gfn=Monaco:h12
+
+  " GRB: set window size"
+  :set lines=100
+  :set columns=171
+
+  " GRB: highlight current line"
+  :set cursorline
+endif
+
+" GRB: use emacs-style tab completion when selecting files, etc
+set wildmode=longest,list
+
+" GRB: Put useful info in status line
+:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+:hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
+
+" GRB: clear the search buffer when hitting return
+:nnoremap <CR> :nohlsearch<cr>
+
+" Remap the tab key to do autocompletion or indentation depending on the
+" context (from http://www.vim.org/tips/tip.php?tip_id=102)
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" When hitting <;>, complete a snippet if there is one; else, insert an actual
+" <;>
+function! InsertSnippetWrapper()
+    let inserted = TriggerSnippet()
+    if inserted == "\<tab>"
+        return ";"
+    else
+        return inserted
+    endif
+endfunction
+inoremap ; <c-r>=InsertSnippetWrapper()<cr>
+
+" Always show tab bar
+set showtabline=2
+
+
+set cursorline
+
+set cmdheight=2
+
+" Don't show scroll bars in the GUI
+set guioptions-=L
+set guioptions-=r
+
+augroup myfiletypes
+  "clear old autocmds in group
+  autocmd!
+  "for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass set ai sw=2 sts=2 et
+  autocmd FileType python set sw=4 sts=4 et
+augroup END
+
+" Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+
+" Map keys to go to specific files
+map <leader>gr :topleft :split config/routes.rb<cr>
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>
+map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
+map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
+map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
+map <leader>gg :topleft 100 :split Gemfile<cr>
+map <leader>gi :CommandTFlush<cr>\|:CommandT integration_spec<cr>
+
+
+colorscheme railscasts
+
+set guifont=Menlo:h14

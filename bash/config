@@ -41,4 +41,4 @@ BMAGENTA='\e[45m'
 BCYAN='\e[46m'
 BWHITE='\e[47m'
 
-PS1="\n\u@\h[\w] \[$EGREEN\]\$(vcprompt)\[$NO_COLOR\]# "
+PS1="\n\u@\h[\w] \[$EGREEN\]\$(vcprompt)\[$NO_COLOR\]\n# "
