@@ -1,5 +1,8 @@
 set nocompatible
 syntax enable 
+
+silent! call pathogen#runtime_append_all_bundles()
+
 set hidden 
 set hlsearch 
 set number 
@@ -51,9 +54,9 @@ endif " has("autocmd")
 
 " GRB: sane editing configuration"
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set autoindent
 
 " set smartindent
@@ -98,15 +101,15 @@ inoremap <s-tab> <c-n>
 
 " When hitting <;>, complete a snippet if there is one; else, insert an actual
 " <;>
-function! InsertSnippetWrapper()
-    let inserted = TriggerSnippet()
-    if inserted == "\<tab>"
-        return ";"
-    else
-        return inserted
-    endif
-endfunction
-inoremap ; <c-r>=InsertSnippetWrapper()<cr>
+" function! InsertSnippetWrapper()
+"     let inserted = TriggerSnippet()
+"     if inserted == "\<tab>"
+"         return ";"
+"     else
+"         return inserted
+"    endif
+" endfunction
+" inoremap ; <c-r>=InsertSnippetWrapper()<cr>
 
 " Always show tab bar
 set showtabline=2
@@ -160,7 +163,12 @@ map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>gi :CommandTFlush<cr>\|:CommandT integration_spec<cr>
 
+" Ragtag
+let g:ragtag_global_maps=1 
 
 colorscheme railscasts
 
 set guifont=Menlo:h14
+
+" For MakeGreen plugin and Ruby Rspec
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
