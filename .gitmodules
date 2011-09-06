@@ -67,9 +67,9 @@
 [submodule "vim/vim/bundle/vim-srcexpl"]
 	path = vim/vim/bundle/vim-srcexpl
 	url = https://github.com/vim-scripts/Source-Explorer-srcexpl.vim.git
-[submodule "bundle/puppet"]
+[submodule "vim/vim/bundle/puppet"]
 	path = vim/vim/bundle/puppet
 	url = git://github.com/rodjek/vim-puppet.git
-[submodule "bundle/snipmate.vim"]
+[submodule "vim/vim/bundle/snipmate.vim"]
 	path = vim/vim/bundle/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
